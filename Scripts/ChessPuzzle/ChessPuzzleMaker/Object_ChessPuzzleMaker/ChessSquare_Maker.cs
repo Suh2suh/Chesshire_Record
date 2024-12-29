@@ -6,9 +6,9 @@ public class ChessSquare_Maker : MonoBehaviour
 {
 
 	[SerializeField] private ChessSquareInfo chessSquareInfo;
-    public ChessSquareInfo ChessSquareInfo { get => chessSquareInfo; set => chessSquareInfo = value; }
 
-    private ChessBoard_Maker parentChessBoard;
+	#region Private Variables
+	private ChessBoard_Maker parentChessBoard;
 
     private GameObject chessSquareModel;
     private TextMeshPro chessSquareTMP;
@@ -21,21 +21,29 @@ public class ChessSquare_Maker : MonoBehaviour
     private InputHandler inputHandler;
 
     private int occupiedCount = 0;
-    public int OccupiedCount 
-    { 
-        get => occupiedCount; 
-        set
+
+	#endregion
+
+	#region Properties
+	public ChessSquareInfo ChessSquareInfo { get => chessSquareInfo; set => chessSquareInfo = value; }
+
+	public int OccupiedCount
+	{
+		get => occupiedCount;
+		set
 		{
-            if (occupiedCount == 0 && value == 1)
-                ChangeSquareGridColor(Color.yellow * 0.5f);
-            if (occupiedCount == 1 && value == 0)
-                ChangeSquareGridColor(initialGridColor);
+			if (occupiedCount == 0 && value == 1)
+				ChangeSquareGridColor(Color.yellow * 0.5f);
+			if (occupiedCount == 1 && value == 0)
+				ChangeSquareGridColor(initialGridColor);
 
-            occupiedCount = value;
-        }
-    }
+			occupiedCount = value;
+		}
+	}
 
-    public static readonly Color entranceColor = Color.red;
+	#endregion
+
+	public static readonly Color entranceColor = Color.red;
     public static readonly Color exitColor = Color.green;
 
 
@@ -168,7 +176,9 @@ public class ChessSquare_Maker : MonoBehaviour
     }
 
 
-	public void AllignChessSquareUnderBoard()
+    #region [Action]: Alignment
+
+    public void AllignChessSquareUnderBoard()
 	{
         if (transform.parent.TryGetComponent(out ChessBoard_Maker parentChessBoard))
         {
@@ -189,28 +199,9 @@ public class ChessSquare_Maker : MonoBehaviour
     }
 
 
-    private void ToggleSquareActiveStatus()
-    {
-        chessSquareInfo.IsActive = !chessSquareInfo.IsActive;
+    #endregion
 
-        chessSquareModel.SetActive(chessSquareInfo.IsActive);
-        chessSquareTMP.gameObject.SetActive(ChessSquareInfo.IsActive);
-
-        if(chessSquareInfo.IsActive == false)
-		{
-            if (parentChessBoard.IsChessBoardExit(chessSquareInfo))
-			{
-                ChangeSquareModelColor(initialModelColor);
-                parentChessBoard.ResetChessBoardEntrance();
-            }
-            else
-            if(parentChessBoard.IsChessBoardExit(chessSquareInfo))
-			{
-                ChangeSquareModelColor(initialModelColor);
-                parentChessBoard.ResetChessBoardExit();
-            }
-        }
-    }
+    #region [Action]: SquareType Control
 
     private void CycleChessSquareType()
 	{
@@ -222,7 +213,40 @@ public class ChessSquare_Maker : MonoBehaviour
         UpdateSquareTextTo(chessSquareInfo.SquareType);
     }
 
-    private void ToggleBoardEntranceForThis()
+
+	#endregion
+
+	#region [Action]: Activation Toggle
+
+	private void ToggleSquareActiveStatus()
+	{
+		chessSquareInfo.IsActive = !chessSquareInfo.IsActive;
+
+		chessSquareModel.SetActive(chessSquareInfo.IsActive);
+		chessSquareTMP.gameObject.SetActive(ChessSquareInfo.IsActive);
+
+		if (chessSquareInfo.IsActive == false)
+		{
+			if (parentChessBoard.IsChessBoardExit(chessSquareInfo))
+			{
+				ChangeSquareModelColor(initialModelColor);
+				parentChessBoard.ResetChessBoardEntrance();
+			}
+			else
+			if (parentChessBoard.IsChessBoardExit(chessSquareInfo))
+			{
+				ChangeSquareModelColor(initialModelColor);
+				parentChessBoard.ResetChessBoardExit();
+			}
+		}
+	}
+
+
+	#endregion
+
+	#region [Action]: Entrance / Exit Toggle
+
+	private void ToggleBoardEntranceForThis()
 	{
         if (parentChessBoard.IsChessBoardEntrance(chessSquareInfo))
         {
@@ -288,7 +312,12 @@ public class ChessSquare_Maker : MonoBehaviour
     }
 
 
-    public void ChangeSquareModelColor(Color newColor)
+	#endregion
+
+
+	#region Utility
+
+	public void ChangeSquareModelColor(Color newColor)
     {
         LitMaterialHandler.ChangeColor(modelMeshRenderer, newColor);
     }
@@ -296,7 +325,6 @@ public class ChessSquare_Maker : MonoBehaviour
     {
         LitMaterialHandler.ChangeColor(gridMeshRenderer, newColor);
     }
-
 
     private void ToggleSquareGridEmission(bool isOn)
 	{
@@ -307,6 +335,9 @@ public class ChessSquare_Maker : MonoBehaviour
 	{
         chessSquareTMP.text = squareType.ToString();
     }
+
+
+	#endregion
 
 
 }

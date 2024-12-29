@@ -1,27 +1,28 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
 public abstract class SignleSceneLoader : MonoBehaviour
 {
-	public void LoadSceneSigle(string sceneName, bool loadSceneInstantly = false)
+
+	public void LoadSceneSingle(string sceneName, bool loadSceneInstantly = false)
 	{
 		var sceneAsyncOperation = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 		sceneAsyncOperation.allowSceneActivation = loadSceneInstantly;
 
-		StartCoroutine(LoadSceneSigle(sceneAsyncOperation));
+		StartCoroutine(LoadSceneSingle(sceneAsyncOperation));
 	}
-	private IEnumerator LoadSceneSigle(AsyncOperation sceneAsyncOperation)
+	private IEnumerator LoadSceneSingle(AsyncOperation sceneAsyncOperation)
 	{
-		yield return StartCoroutine(OperateSceneAsyncSigle(sceneAsyncOperation));
+		yield return StartCoroutine(OperateSceneAsyncSingle(sceneAsyncOperation));
 
 		if(sceneAsyncOperation.isDone.Equals(false))
 			yield return StartCoroutine(CallbackSceneAsync(sceneAsyncOperation));
 	}
 
-	private IEnumerator OperateSceneAsyncSigle(AsyncOperation sceneAsyncOperation)
+
+	private IEnumerator OperateSceneAsyncSingle(AsyncOperation sceneAsyncOperation)
 	{
 		if(sceneAsyncOperation.allowSceneActivation.Equals(false))
 		{
@@ -43,6 +44,7 @@ public abstract class SignleSceneLoader : MonoBehaviour
 		}
 	}
 
+
 	private IEnumerator CallbackSceneAsync(AsyncOperation sceneAsyncOperation)
 	{
 		while(sceneAsyncOperation.isDone == false) 
@@ -54,5 +56,6 @@ public abstract class SignleSceneLoader : MonoBehaviour
 		}
 	}
 	protected abstract bool IsSceneLoadable();
+
 
 }

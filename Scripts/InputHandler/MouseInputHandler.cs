@@ -8,6 +8,7 @@ public class MouseInputHandler : MonoBehaviour
 	[SerializeField] private MouseInputStatus mouseDownTargets;
 	[SerializeField] private MouseInputStatus mouseUpTargets;
 	[SerializeField] private  MouseInputStatus mousePressedTargets;
+
 	private MouseInputStatus mouseDown = new();
 	private MouseInputStatus mouseUp = new();
 	private MouseInputStatus mousePressed = new();

@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
+
 public static class DataIO
 {
-    public static string ReadData(string dataPath)
+	#region [Read / Write]
+
+	public static string ReadData(string dataPath)
     {
         string loadedJson = "";
         using (StreamReader streamReader = new(dataPath))
@@ -56,6 +59,10 @@ public static class DataIO
     }
 
 
+    #endregion
+
+    #region [Utility]
+
     public static List<string> GetAllFilePathsInDirectory(string directory)
     {
         if (!Directory.Exists(directory))  return null;
@@ -88,6 +95,9 @@ public static class DataIO
         string directory = Path.GetDirectoryName(fullDataPath);
         if (!Directory.Exists(directory)) Directory.CreateDirectory(directory);
     }
+
+
+	#endregion
 
 
 }

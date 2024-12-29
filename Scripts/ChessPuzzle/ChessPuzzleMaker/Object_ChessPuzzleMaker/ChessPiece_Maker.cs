@@ -6,7 +6,7 @@ public class ChessPiece_Maker : ChessPieceBase
 	public ChessSquare_Maker toppingChessSquare = null;
 
 	#region private variables
-	private ChessPieceHandler chessPieceHandler;
+	private ChessPieceHandler_Maker chessPieceHandler;
 	//private LineRenderer lineRenderer;
 
 	protected override bool IsChessPieceInteractable
@@ -22,8 +22,7 @@ public class ChessPiece_Maker : ChessPieceBase
     {
 		base.Awake();
 
-        chessPieceHandler = transform.parent.GetComponentInParent<ChessPieceHandler>();
-        //lineRenderer = transform.parent.GetComponentInParent<LineRenderer>();
+        chessPieceHandler = transform.parent.GetComponentInParent<ChessPieceHandler_Maker>();
         chessBoardPlane = new Plane(Vector3.up, new Vector3(0,0,0));   // 체스 보드판 Plane
     }
 
@@ -39,11 +38,7 @@ public class ChessPiece_Maker : ChessPieceBase
 		chessPieceHandler.HoldingChessPiece = PieceType.None;
 	}
 
-	protected override void OnChessPieceReturn()
-	{
-		//
-	}
-
+	protected override void OnChessPieceReturn() {}
 
 
 	#region Emission On Hover

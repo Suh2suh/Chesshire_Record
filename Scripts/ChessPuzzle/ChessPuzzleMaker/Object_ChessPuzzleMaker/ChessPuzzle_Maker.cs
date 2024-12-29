@@ -15,10 +15,10 @@ public class ChessPuzzle_Maker : MonoBehaviour
 		childChessBoard = GetComponentInChildren<ChessBoard_Maker>();
 		childChessPieceBox = GetComponentInChildren<ChessPieceBox_Maker>();
 
-		AssignChessPuzzleInfoFromChildren();
+		LinkPuzzleInfoWithChildren();
 	}
 
-	public void AssignChessPuzzleInfoFromChildren()
+	public void LinkPuzzleInfoWithChildren()
 	{
 		chessPuzzleInfo.ChessBoardInfo = transform.GetComponentInChildren<ChessBoard_Maker>().ChessBoardInfo;
 		chessPuzzleInfo.ChessPieceBoxInfo = transform.GetComponentInChildren<ChessPieceBox_Maker>().ChessPieceBoxInfo;

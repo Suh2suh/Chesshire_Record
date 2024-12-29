@@ -2,11 +2,10 @@
 using UnityEngine;
 
 
-[RequireComponent(typeof(ChessPuzzleCreator), typeof(ChessBoardCameraMover))]
+[RequireComponent(typeof(ChessPuzzleCreator))]
 public class ChessPuzzleTesterHandler : MonoBehaviour
 {
 	[SerializeField] ChessPuzzleCreator chessPuzzleCreator;
-	[SerializeField] ChessBoardCameraMover chessBoardCameraMover;
 
 	public void LoadPuzzle(string loadingPuzzleName)
 	{

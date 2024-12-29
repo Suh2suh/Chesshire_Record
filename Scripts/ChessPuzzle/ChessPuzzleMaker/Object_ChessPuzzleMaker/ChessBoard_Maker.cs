@@ -5,12 +5,15 @@ using UnityEngine;
 public class ChessBoard_Maker : MonoBehaviour
 {
 	[SerializeField] private ChessBoardInfo chessBoardInfo;
-	public ChessBoardInfo ChessBoardInfo { get => chessBoardInfo; }
-
-
 	private Dictionary<Vector2Int, ChessSquare_Maker> gridChessSquarePair = new();
+
+
+	#region Properties
+	public ChessBoardInfo ChessBoardInfo { get => chessBoardInfo; }
 	public Dictionary<Vector2Int, ChessSquare_Maker> GridChessSquarePair { get => gridChessSquarePair; }
-	
+
+	#endregion
+
 
 	private void Awake()
 	{
@@ -44,32 +47,7 @@ public class ChessBoard_Maker : MonoBehaviour
 	}
 
 
-	public List<ChessSquare_Maker> GetChessSquaresOn(List<Vector2Int> grids)
-	{
-		var chessSquares = new List<ChessSquare_Maker>();
-
-		foreach(var grid in grids)
-		{
-			if (TryGetChessSquareOn(grid, out var chessSquare))
-				chessSquares.Add(chessSquare);
-		}
-
-		return chessSquares;
-	}
-	public bool TryGetChessSquareOn(Vector2Int grid, out ChessSquare_Maker chessSquare)
-	{
-		if(isGirdInChessBoard(grid))
-		{
-			chessSquare = gridChessSquarePair[grid];
-			return true;
-		}
-		else
-		{
-			chessSquare = null;
-			return false;
-		}
-	}
-
+	#region [Action]: Entrance / Exit Control
 
 	public bool TrySetChessBoardEntranceAs(ChessSquareInfo chessSquare)
 	{
@@ -111,10 +89,45 @@ public class ChessBoard_Maker : MonoBehaviour
 	}
 
 
+	#endregion
+
+
+	#region Utility
+
+	public List<ChessSquare_Maker> GetChessSquaresOn(List<Vector2Int> grids)
+	{
+		var chessSquares = new List<ChessSquare_Maker>();
+
+		foreach (var grid in grids)
+		{
+			if (TryGetChessSquareOn(grid, out var chessSquare))
+				chessSquares.Add(chessSquare);
+		}
+
+		return chessSquares;
+	}
+	public bool TryGetChessSquareOn(Vector2Int grid, out ChessSquare_Maker chessSquare)
+	{
+		if (isGirdInChessBoard(grid))
+		{
+			chessSquare = gridChessSquarePair[grid];
+			return true;
+		}
+		else
+		{
+			chessSquare = null;
+			return false;
+		}
+	}
+
+
 	bool isGirdInChessBoard(Vector2Int grid)
 	{
 		return (grid.x >= 0 && grid.x < chessBoardInfo.BoardLength) && (grid.y >= 0 && grid.y < chessBoardInfo.BoardLength);
 	}
+
+
+	#endregion
 
 
 }

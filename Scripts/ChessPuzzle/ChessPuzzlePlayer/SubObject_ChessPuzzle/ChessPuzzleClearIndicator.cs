@@ -6,10 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(MeshRenderer))]
 public class ChessPuzzleClearIndicator : MonoBehaviour
 {
+	#region Private Varaibles
 	private MeshRenderer modelMeshRenderer;
 	private ChessPuzzle_GamePlay parentChessPuzzle;
-
 	private bool isChessPuzzleClearable = false;
+
+	#endregion
+
 	public bool IsChessPuzzleClearable
 	{
 		get => isChessPuzzleClearable;
@@ -43,7 +46,6 @@ public class ChessPuzzleClearIndicator : MonoBehaviour
 	}
 
 
-	// [Action]
 	private void OnMouseDown()
 	{
 		if(parentChessPuzzle.IsChessInteractable)

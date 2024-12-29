@@ -4,7 +4,7 @@ using TMPro;
 
 public class ChessPieceBox_Maker : MonoBehaviour
 {
-	// TODO: Custom Inspector·Î UnEditable Ã³¸®
+	// TODO: InEditable
 	[SerializeField] private ChessPieceBoxInfo chessPieceBoxInfo;
 	[SerializeField] private UDictionary<PieceType, TextMeshProUGUI> countTextPerPieceType = new()
 	{

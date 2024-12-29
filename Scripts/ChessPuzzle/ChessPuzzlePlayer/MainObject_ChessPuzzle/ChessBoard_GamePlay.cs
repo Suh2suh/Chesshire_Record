@@ -4,9 +4,6 @@ using UnityEditor;
 using UnityEngine;
 
 
-/// <summary>
-/// Chess Square Square Manager
-/// </summary>
 [RequireComponent(typeof(ChessSquareCoroutineManager))]
 public class ChessBoard_GamePlay : ChessBoardBase
 {

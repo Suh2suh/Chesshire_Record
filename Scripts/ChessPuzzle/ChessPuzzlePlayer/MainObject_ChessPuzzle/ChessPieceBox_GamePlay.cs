@@ -7,12 +7,14 @@ public class ChessPieceBox_GamePlay : ChessPieceBoxBase
 {
 	[SerializeField, ReadOnly] private ChessPieceBase spawnedChessPiece = null;
 
-	#region private Variables
+	#region Private Variables
 	private ObjectPool<ChessPieceBase> chessPiecePool;
 	private Dictionary<int, ChessPieceBase> chessPieceIndexPair = new();
 
 	#endregion
 
+
+	#region Unity Methods: Link Events
 
 	private void Awake()
 	{
@@ -22,6 +24,9 @@ public class ChessPieceBox_GamePlay : ChessPieceBoxBase
 	{
 		OnChessPieceReturn -= DestroyChessPiece;
 	}
+
+
+	#endregion
 
 
 	protected override void CallbackInitialize()

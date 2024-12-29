@@ -31,9 +31,7 @@ public class ChessPiece_GamePlay : ChessPieceBase
 	#endregion
 
 
-	/// <summary>
 	/// For ChessPiecePanel (Teeth)
-	/// </summary>
 	#region [Action: Force Chess Control]
 	public void ForceHoldChessPiece()
 	{
@@ -86,9 +84,7 @@ public class ChessPiece_GamePlay : ChessPieceBase
 	}
 
 
-	/// <summary>
-	///  PC(mouse), Switch(crosshair) Enviroment Only
-	/// </summary>
+	// PC(mouse), Switch(crosshair) Enviroment Only
 	#region [Action: Emission On PointerEnter]
 #if UNITY_STANDALONE
 
@@ -104,7 +100,7 @@ public class ChessPiece_GamePlay : ChessPieceBase
 	}
 
 
-	#endif
+#endif
 	#endregion
 
 }

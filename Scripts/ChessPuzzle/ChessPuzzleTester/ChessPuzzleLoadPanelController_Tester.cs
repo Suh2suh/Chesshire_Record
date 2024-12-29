@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -12,15 +10,15 @@ public class ChessPuzzleLoadPanelController_Tester: ChessPuzzleLoadPanelControll
 	protected override void OnChessPuzzleLoadButtonClicked(PointerEventData pointerEventData)
 	{
 		string loadingPuzzleName = selectedPuzzleNameText.text;
-		PrepareChessPuzzleMaker(loadingPuzzleName);
+		PrepareChessPuzzleTester(loadingPuzzleName);
 
-		if (chessPuzzleOnSelectPanel.activeSelf) chessPuzzleOnSelectPanel.SetActive(false);
+		if (ChessPuzzleOnSelectPanel.activeSelf) ChessPuzzleOnSelectPanel.SetActive(false);
 	}
-	private void PrepareChessPuzzleMaker(string loadingPuzzleName)
+	private void PrepareChessPuzzleTester(string loadingPuzzleName)
 	{
 		chessPuzzleTesterHandler.LoadPuzzle(loadingPuzzleName);
 
-		this.gameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
 

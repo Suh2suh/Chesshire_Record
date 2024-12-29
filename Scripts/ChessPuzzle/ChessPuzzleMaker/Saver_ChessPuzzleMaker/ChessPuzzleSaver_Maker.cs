@@ -26,6 +26,7 @@ public class ChessPuzzleSaver_Maker : MonoBehaviour
 	{
 		var savingPuzzleInfo = transform.GetComponentInChildren<ChessPuzzle_Maker>().ChessPuzzleInfo;
 
+
 		if (ChessPuzzleDataValidater.IsEntranceExitValid(savingPuzzleInfo.ChessBoardInfo) == false)
 		{
 			warningPanel.GetComponentInChildren<TextMeshProUGUI>().text = "Must Make Entrance & Exit!\nClick Chess Square while Pressing 'E'/'S' ";
@@ -48,6 +49,7 @@ public class ChessPuzzleSaver_Maker : MonoBehaviour
 		SureToSavePanel.GetComponentInChildren<TextMeshProUGUI>().text = "Are you sure to save as\n<color=red>" + puzzleNameInputField.text + "</color>?";
 		SureToSavePanel.SetActive(true);
 	}
+
 
 	public void OnSureToSaveButtonClicked()
 	{

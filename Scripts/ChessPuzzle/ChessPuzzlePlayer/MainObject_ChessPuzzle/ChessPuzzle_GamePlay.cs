@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChessPuzzle_GamePlay : ChessPuzzleBase
 {
-	#region Setting
+	#region Setting Variables
 
 	[SerializeField] GameEvent chessPuzzleStartEvent;
 

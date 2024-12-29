@@ -13,7 +13,7 @@ public class ChessPuzzleLoadPanelController_Maker : ChessPuzzleLoadPanelControll
 		string loadingPuzzleName = selectedPuzzleNameText.text;
 		StartCoroutine(PrepareChessPuzzleMakerAsync(loadingPuzzleName));
 
-		if (chessPuzzleOnSelectPanel.activeSelf) chessPuzzleOnSelectPanel.SetActive(false);
+		if (ChessPuzzleOnSelectPanel.activeSelf) ChessPuzzleOnSelectPanel.SetActive(false);
 	}
 
 	private IEnumerator PrepareChessPuzzleMakerAsync(string loadingPuzzleName)
@@ -24,7 +24,7 @@ public class ChessPuzzleLoadPanelController_Maker : ChessPuzzleLoadPanelControll
 		chessPuzzleMakerHandler.ChessBoardCameraMover.ConvertCamTo(loadedChessPuzzleData.ChessBoardInfo.BoardLength);
 		chessPuzzleMakerHandler.ChessPuzzleSaver.PuzzleNameInputFiled.text = loadingPuzzleName;
 
-		this.gameObject.SetActive(false);
+		gameObject.SetActive(false);
 	}
 
 

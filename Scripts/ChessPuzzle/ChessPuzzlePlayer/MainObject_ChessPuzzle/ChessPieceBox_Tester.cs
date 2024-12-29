@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-/// <summary>
-/// Chess Piece Manager
-/// </summary>
 public class ChessPieceBox_Tester : ChessPieceBoxBase
 {
 	#region Setting Variables

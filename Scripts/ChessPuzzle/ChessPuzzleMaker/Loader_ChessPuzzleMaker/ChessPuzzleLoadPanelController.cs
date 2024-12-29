@@ -1,23 +1,23 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public abstract class ChessPuzzleLoadPanelController : MonoBehaviour
 {
-
+	#region Setting Variables
 	[SerializeField] private Transform loadableChessPuzzleContainer;
 	[SerializeField] private GameObject loadableChessPuzzleButtonPrefab;
 
 	[SerializeField, Space(15)] private GameObject nothingToLoadText;
-	[SerializeField] protected GameObject chessPuzzleOnSelectPanel;
-	[SerializeField, Space(15)] private GameObject chessPuzzleLoadButton;
-	protected TextMeshProUGUI selectedPuzzleNameText;
+	[SerializeField, Space(15)] private GameObject chessPuzzleOnSelectPanel;
+	[SerializeField] private GameObject chessPuzzleLoadButton;
 
-	private List<string> existingPuzzleNames;
-	public List<string> ExistingPuzzleNames { get => existingPuzzleNames; }
+	#endregion
+
+	protected GameObject ChessPuzzleOnSelectPanel { get => chessPuzzleOnSelectPanel; }
+	protected TextMeshProUGUI selectedPuzzleNameText;
 
 
 	#region Unity Methods
@@ -39,21 +39,17 @@ public abstract class ChessPuzzleLoadPanelController : MonoBehaviour
 	}
 	private void OnDisable()
 	{
-		Initialize();
+		Clear();
 	}
 
 
 	#endregion
 
 
-	// [Action: On PuzzleLoadButton Clicked]
-	protected abstract void OnChessPuzzleLoadButtonClicked(PointerEventData pointerEventData);
+	#region [Action]: Display Loadable ChessPuzzles in folder
 
-
-	// [Action: Display LoadableChessPuzzles | On LoadableChessPuzzleButton Clicked]
 	private void DisplayLoadableChessPuzzles()
 	{
-		existingPuzzleNames = new();
 		var loadableChessPuzzleNames = DataIO.GetAllFileNamesInDirectory(ChessPuzzleDataIO.GetChessPuzzleDirectory());
 		if (loadableChessPuzzleNames.Count > 0)
 		{
@@ -71,7 +67,6 @@ public abstract class ChessPuzzleLoadPanelController : MonoBehaviour
 																						 EventTriggerType.PointerClick,
 																						 OnLoadableChessPuzzleButtonClicked,
 																						 puzzleName);
-				existingPuzzleNames.Add(puzzleName);
 			}
 			if (nothingToLoadText.activeSelf) nothingToLoadText.SetActive(false);
 		}
@@ -84,8 +79,17 @@ public abstract class ChessPuzzleLoadPanelController : MonoBehaviour
 	}
 
 
-	// [Initialization]
-	private void Initialize()
+	#endregion
+
+
+	/// <summary>
+	/// On ChessPuzzle Load Button Clicked
+	/// </summary>
+	/// <param name="pointerEventData"></param>
+	protected abstract void OnChessPuzzleLoadButtonClicked(PointerEventData pointerEventData);
+
+
+	private void Clear()
 	{
 		if (chessPuzzleOnSelectPanel.activeSelf) chessPuzzleOnSelectPanel.SetActive(false);
 		if (!nothingToLoadText.activeSelf) nothingToLoadText.SetActive(true);

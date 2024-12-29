@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(ChessPieceCreator))]
-public class ChessPieceHandler : MonoBehaviour
+public class ChessPieceHandler_Maker : MonoBehaviour
 {
 	[SerializeField] private ChessPieceCreator chessPieceCreator;
 	[SerializeField] private PieceType holdingChessPiece = PieceType.None;
@@ -21,7 +21,6 @@ public class ChessPieceHandler : MonoBehaviour
 	public PieceType HoldingChessPiece { get => holdingChessPiece; set => holdingChessPiece = value; }
 
 
-	// [Unity Methods]
 	private void Awake()
 	{
 		parentChessPuzzle = GetComponentInParent<ChessPuzzle_Maker>();
@@ -29,10 +28,10 @@ public class ChessPieceHandler : MonoBehaviour
 
 
 	/// <summary>
-	/// Destory / Add ChessPiece On ChessPieceButton Pressed
+	/// Add/Destroy ChessPiece On ChessPieceButton Pressed
 	/// </summary>
-	/// <param name="pieceType"></param>
-	/// <param name="isIncrement"></param>
+	/// <param name="pieceType">pressed chesspiece button type</param>
+	/// <param name="isIncrement">whether user add or remove chesspiece</param>
 	private void OnChessPieceButtonPressed(PieceType pieceType, bool isIncrement)
 	{
 		if (isIncrement)
@@ -73,7 +72,7 @@ public class ChessPieceHandler : MonoBehaviour
 	#endregion
 
 
-	private void AddNewChessPiece(PieceType newPieceType)
+	public void AddNewChessPiece(PieceType newPieceType)
 	{
 		if (currentChessPieceCount < ChessPieceBoxInfo.maxPieceCount)
 		{
@@ -116,9 +115,6 @@ public class ChessPieceHandler : MonoBehaviour
 	}
 
 
-
-
-	// [Action: ChessPiece Allign]
 	private void AlignChessPieces()
 	{
 		int i = 0;

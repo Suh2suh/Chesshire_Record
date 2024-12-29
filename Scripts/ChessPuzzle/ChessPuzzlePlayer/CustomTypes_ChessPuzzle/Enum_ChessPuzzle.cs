@@ -20,3 +20,9 @@ public enum SquareType
 
     Piece = 3
 }
+
+public enum BoardLength
+{
+	FourByFour = 4, SixBySix = 6,
+	EightByEight = 8, TenByTen = 10
+};

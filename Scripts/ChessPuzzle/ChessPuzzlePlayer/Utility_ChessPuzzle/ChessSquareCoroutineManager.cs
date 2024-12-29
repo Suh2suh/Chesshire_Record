@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// 얘를 static으로 박을지 아니면 Board에서 squares를 관리하니까 맥락상 board에 넣을지 고민해보기
 /// <summary> ROLE: Check Chess Square Mover Coroutine is over, Execute Chess Square Mover Coroutine </summary>
 public class ChessSquareCoroutineManager : MonoBehaviour
 {

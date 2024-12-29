@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// moving ChessBoard & movingChessSquare
-// panelChessPieceBox & spawnChessPeiceBox...
 public class ChessSquare_GamePlay : ChessSquareBase
 {
-	// [Property]
 	public bool IsOnPeak { get; private set; }
 	private ChessBoard_GamePlay chessBoard_GamePlay;
 
@@ -20,10 +17,7 @@ public class ChessSquare_GamePlay : ChessSquareBase
 		chessBoard_GamePlay = parentChessBoard as ChessBoard_GamePlay;
 	}
 
-	protected override void CallbackInitialize()
-	{
-		//
-	}
+	protected override void CallbackInitialize(){}
 
 
 	protected override void OnChessSquareOccupied()
