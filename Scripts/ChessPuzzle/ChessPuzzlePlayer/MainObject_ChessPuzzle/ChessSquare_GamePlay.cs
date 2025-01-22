@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,19 +23,21 @@ public class ChessSquare_GamePlay : ChessSquareBase
 
 	protected override void OnChessSquareOccupied()
 	{
-		chessBoard_GamePlay.GetComponent<ChessSquareCoroutineManager>().StartSquareMoveCoroutine(SmoothMoveChessSquareModel, moveDown: false);
+		chessBoard_GamePlay.GetComponent<ChessSquareElevator>().StartMoveChessSquare(SmoothMoveChessSquareModel, moveDown: false);
 	}
 
 	protected override void OnChessSquareVacated()
 	{
-		chessBoard_GamePlay.GetComponent<ChessSquareCoroutineManager>().StartSquareMoveCoroutine(SmoothMoveChessSquareModel, moveDown: true);
+		chessBoard_GamePlay.GetComponent<ChessSquareElevator>().StartMoveChessSquare(SmoothMoveChessSquareModel, moveDown: true);
 	}
 
 
 	// MovingChessBoard 아래에 있는 애들 한해서만.
 	// [Action: Model - Move, Color, Emit]
-	IEnumerator SmoothMoveChessSquareModel(bool moveDown)
+	private async UniTask SmoothMoveChessSquareModel(bool moveDown)
 	{
+		Debug.Log("Down");
+
 		Vector3 startPos = modelParent.localPosition;
 		Vector3 goalPos = (moveDown ? initialModelPos : Vector3.zero); 
 		float movingDuration = (chessBoard_GamePlay.ChessSquareMovingDuration * Mathf.Abs(goalPos.y - startPos.y)) / Mathf.Abs(initialModelPos.y);   // 3 : x = | highPoint - floorPoint | : | goalPos - startPos |
@@ -50,9 +53,9 @@ public class ChessSquare_GamePlay : ChessSquareBase
 
 			bool shouldStopMoving = (moveDown == true && OccupyingChessPieces.Count > 0) || (moveDown == false && OccupyingChessPieces.Count == 0);
 			if (shouldStopMoving)
-				yield break;
+				return;
 
-			yield return null;
+			await UniTask.Yield();
 	    }
 
 		InstantMoveChessSquareModel(moveDown);

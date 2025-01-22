@@ -107,7 +107,7 @@ public class ChessPiecePanelController : MonoBehaviour
 	/// <param name="releasedChessPiece"></param>
 	private void ShowChessPiecePanel(ChessPieceBase releasedChessPiece)
 	{
-		transform.DOMove(initialPos, panelMoveDuration);
+		transform.DOLocalMove(Vector3.zero, panelMoveDuration);
 	}
 
 

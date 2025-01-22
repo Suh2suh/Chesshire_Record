@@ -49,19 +49,14 @@ public abstract class ChessPuzzleBase : MonoBehaviour, IChessPuzzle
 		chessBoard = chessBoard ?? GetComponentInChildren<ChessBoardBase>();
 		chessPieceBox = chessPieceBox ?? GetComponentInChildren<ChessPieceBoxBase>();
 
-		// 고칠 점: 현재 Play 중인 체스 아래에서만.
+		// 고칠 점: 현재 Play 중인 체스 아래에서만
+		// ChessPuzzleLinker을 해서 해당 스크립트가 대신 Linking해주면?
 		OnChessPieceRelease += TryPlaceChessPieceOnChessSquare;
 		OnChessPiecePlaced += AlertOnPathFindingFinished;   // 길 가로막았을 때 대비
 		OnChessPieceHold += AlertOnPathFindingFinished;
 
 		PlayerController.OnPlayerMoveStart += SetChessPuzzleNonInteractive;
 		PlayerController.OnPlayerMoveEnd += SetChessPuzzleInteractive;
-
-		if(chessBoard.GetType() == typeof(ChessBoard_GamePlay))
-		{
-			var movingChessBoard = chessBoard as ChessBoard_GamePlay;
-			movingChessBoard.ChessSquareCoroutineManager.OnChessBoardMoveEnd += AlertOnPathFindingFinished;   // 길 다 올라왔을 때 체크(원래 체크)
-		}
 	}
 
 	private void Start()
@@ -78,12 +73,6 @@ public abstract class ChessPuzzleBase : MonoBehaviour, IChessPuzzle
 
 		PlayerController.OnPlayerMoveStart -= SetChessPuzzleNonInteractive;
 		PlayerController.OnPlayerMoveEnd -= SetChessPuzzleInteractive;
-
-		if (chessBoard.GetType() == typeof(ChessBoard_GamePlay))
-		{
-			var movingChessBoard = chessBoard as ChessBoard_GamePlay;
-			movingChessBoard.ChessSquareCoroutineManager.OnChessBoardMoveEnd -= AlertOnPathFindingFinished;   // 길 다 올라왔을 때 체크(원래 체크)
-		}
 	}
 
 	#endregion
@@ -254,15 +243,13 @@ public abstract class ChessPuzzleBase : MonoBehaviour, IChessPuzzle
 	protected bool TryFindChessPuzzlePath(out List<Node> resultPathList)
 	{
 		resultPathList = OptimalPathCalculator.FindPath(ChessPuzzleInfo.ChessBoardInfo.EntranceGrid.Grid,
-																							ChessPuzzleInfo.ChessBoardInfo.ExitGrid.Grid,
-																							ChessPuzzleInfo.ChessBoardInfo.BoardLength,
-																							ValidateEntranceGrid, ValidatePassableGrid);
+														ChessPuzzleInfo.ChessBoardInfo.ExitGrid.Grid,
+														ChessPuzzleInfo.ChessBoardInfo.BoardLength,
+														ValidateEntranceGrid, ValidatePassableGrid);
 		if (resultPathList != null && resultPathList.Count > 0 &&
 			resultPathList[0].Grid == ChessPuzzleInfo.ChessBoardInfo.EntranceGrid.Grid &&
 			resultPathList[^1].Grid == ChessPuzzleInfo.ChessBoardInfo.ExitGrid.Grid)
 		{
-			//foreach (var node in resultPathList)
-			//	Debug.Log(node);
 
 			return true;
 		}

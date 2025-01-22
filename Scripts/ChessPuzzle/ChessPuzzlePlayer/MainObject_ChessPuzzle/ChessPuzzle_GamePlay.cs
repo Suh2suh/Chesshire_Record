@@ -21,8 +21,8 @@ public class ChessPuzzle_GamePlay : ChessPuzzleBase
 	{
 		base.Awake();
 
-		// When ChessSquares Moving Finished
-		(chessBoard as ChessBoard_GamePlay).ChessSquareCoroutineManager.OnChessBoardMoveEnd += AlertOnPathFindingFinished;
+		ChessSquareElevator.Instance.OnChessSquareMoveDown += AlertOnPathFindingFinished;
+		ChessSquareElevator.Instance.OnChessBoardMoveEnd += AlertOnPathFindingFinished;
 
 	}
 
@@ -31,7 +31,8 @@ public class ChessPuzzle_GamePlay : ChessPuzzleBase
 		base.OnDestroy();
 
 		// When ChessSquares Moving Finished
-		(chessBoard as ChessBoard_GamePlay).ChessSquareCoroutineManager.OnChessBoardMoveEnd -= AlertOnPathFindingFinished;
+		ChessSquareElevator.Instance.OnChessSquareMoveDown -= AlertOnPathFindingFinished;
+		ChessSquareElevator.Instance.OnChessBoardMoveEnd -= AlertOnPathFindingFinished;
 	}
 
 
@@ -83,8 +84,8 @@ public class ChessPuzzle_GamePlay : ChessPuzzleBase
 		if (chessBoard.TryGetChessSquareOn(checkingGird, out var checkingChessSquare))
 		{
 			return (checkingChessSquare.ChessSquareInfo.SquareType == SquareType.Common &&
-						checkingChessSquare.OccupyingChessPieces.Count > 0 &&
-						(checkingChessSquare as ChessSquare_GamePlay).IsOnPeak);
+					checkingChessSquare.OccupyingChessPieces.Count > 0 &&
+					(checkingChessSquare as ChessSquare_GamePlay).IsOnPeak);
 		}
 
 		return false;

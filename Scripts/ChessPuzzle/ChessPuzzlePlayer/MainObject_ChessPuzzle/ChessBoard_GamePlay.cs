@@ -1,39 +1,21 @@
 using System.Collections.Generic;
-using System.Linq;
-using UnityEditor;
 using UnityEngine;
 
 
-[RequireComponent(typeof(ChessSquareCoroutineManager))]
 public class ChessBoard_GamePlay : ChessBoardBase
 {
 	#region Setting Variables
-	[SerializeField] private ChessSquareCoroutineManager chessSquareCoroutineManager;
 	[SerializeField] private float chessSquareMovingDuration;
 
 	#endregion
 
 	#region [Property]
-	public ChessSquareCoroutineManager ChessSquareCoroutineManager
-	{
-		get => chessSquareCoroutineManager;
-		private set => chessSquareCoroutineManager = value;
-	}
-
 	public float ChessSquareMovingDuration 
 	{
 		get => chessSquareMovingDuration; 
 		private set => chessSquareMovingDuration = value; 
 	}
 
-	#endregion
-
-
-	#region Unity Methods
-	private void Awake()
-	{
-		chessSquareCoroutineManager = GetComponent<ChessSquareCoroutineManager>();
-	}
 	#endregion
 
 
