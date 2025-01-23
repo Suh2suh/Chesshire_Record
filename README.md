@@ -1,8 +1,8 @@
 
 # Chesshire
 <b>Contents</b>
-- [Preview](https://github.com/Suh2suh/Chesshire_Record/new/main?filename=README.md#L7/)
-- [Folder Structure](https://github.com/Suh2suh/Chesshire_Record/new/main?filename=README.md#L17))
+- Preview
+- Folder Structure
   
 ## Preview
 - <b>Play ChessPuzzle</b>
